@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 import cv2
 from pathlib import Path
-from typing import Tuple, List, Optional
+from typing import Tuple, List, Optional, Dict
 
 
 class GTSRBDataLoader:
@@ -89,12 +89,12 @@ class GTSRBDataLoader:
         
         return np.array(images), np.array(labels)
     
-    def get_class_names(self) -> List[str]:
+    def get_class_names(self) -> Dict[int, str]:
         """
-        Retourne la liste des noms de classes (peut être personnalisée)
+        Retourne le dictionnaire des noms de classes (peut être personnalisée)
         
         Returns:
-            Liste des noms de classes
+            Dictionnaire des noms de classes {id: nom}
         """
         # Noms simplifiés des panneaux les plus courants
         class_names = {
