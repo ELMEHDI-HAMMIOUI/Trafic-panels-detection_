@@ -16,10 +16,34 @@ class RealTimeDetector:
         Initialise le détecteur
         
         Args:
-            model_path: Chemin vers le modèle entraîné
+            model_path: Chemin vers le modèle entraîné (peut être relatif ou absolu)
             class_names: Dictionnaire des noms de classes
             input_size: Taille d'entrée du modèle
         """
+        # Convertir en Path pour gérer les chemins relatifs/absolus
+        from pathlib import Path
+        model_path_obj = Path(model_path)
+        
+        # Si le chemin est relatif et n'existe pas, essayer depuis le dossier models/
+        if not model_path_obj.is_absolute() and not model_path_obj.exists():
+            # Essayer depuis le dossier du projet
+            project_root = Path(__file__).parent.parent
+            alt_path = project_root / model_path
+            if alt_path.exists():
+                model_path = str(alt_path)
+            else:
+                # Essayer directement dans models/
+                alt_path = project_root / "models" / model_path_obj.name
+                if alt_path.exists():
+                    model_path = str(alt_path)
+        
+        # Vérifier que le fichier existe
+        if not Path(model_path).exists():
+            raise FileNotFoundError(
+                f"Modèle non trouvé: {model_path}\n"
+                f"Vérifiez que le chemin est correct ou entraînez un modèle avec: python main.py train"
+            )
+        
         self.model = tf.keras.models.load_model(model_path)
         self.class_names = class_names
         self.input_size = input_size
