@@ -91,12 +91,12 @@ class GTSRBDataLoader:
     
     def get_class_names(self) -> Dict[int, str]:
         """
-        Retourne le dictionnaire des noms de classes (peut être personnalisée)
+        Retourne le dictionnaire complet des noms de classes GTSRB (43 classes)
         
         Returns:
             Dictionnaire des noms de classes {id: nom}
         """
-        # Noms simplifiés des panneaux les plus courants
+        # Noms complets des 43 classes GTSRB
         class_names = {
             0: "Limite de vitesse 20",
             1: "Limite de vitesse 30",
@@ -107,18 +107,40 @@ class GTSRBDataLoader:
             6: "Fin limite de vitesse 80",
             7: "Limite de vitesse 100",
             8: "Limite de vitesse 120",
-            9: "Dépassement interdit",
-            10: "Dépassement interdit pour camions",
-            11: "Priorité à droite",
+            9: "Depassement interdit",
+            10: "Depassement interdit pour camions",
+            11: "Priorite a droite",
             12: "Route prioritaire",
-            13: "Cédez le passage",
+            13: "Cedez le passage",
             14: "STOP",
             15: "Sens interdit",
             16: "Interdiction aux camions",
-            17: "Interdiction d'entrée",
-            18: "Attention générale",
-            19: "Virage dangereux à gauche",
-            20: "Virage dangereux à droite",
+            17: "Interdiction d'entree",
+            18: "Attention generale",
+            19: "Virage dangereux a gauche",
+            20: "Virage dangereux a droite",
+            21: "Double virage",
+            22: "Route bosselee",
+            23: "Route glissante",
+            24: "Retrécissement de route a droite",
+            25: "Travaux",
+            26: "Feux de signalisation",
+            27: "Passage pietons",
+            28: "Enfants traversant",
+            29: "Velos traversant",
+            30: "Attention glace/neige",
+            31: "Animaux sauvages traversant",
+            32: "Fin de toutes les limitations",
+            33: "Tourner a droite obligatoire",
+            34: "Tourner a gauche obligatoire",
+            35: "Tout droit obligatoire",
+            36: "Tout droit ou a droite obligatoire",
+            37: "Tout droit ou a gauche obligatoire",
+            38: "Tenir la droite",
+            39: "Tenir la gauche",
+            40: "Rond-point obligatoire",
+            41: "Fin de depassement interdit",
+            42: "Fin de depassement interdit pour camions",
         }
         return class_names
 

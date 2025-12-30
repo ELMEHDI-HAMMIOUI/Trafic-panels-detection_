@@ -78,9 +78,11 @@ def main():
         detector = RealTimeDetector(model_path, class_names)
         print("✅ Détecteur chargé")
         
-        # Détecter
+        # Détecter avec seuil de confiance très strict
         print(f"\nAnalyse de l'image: {image_path}")
-        result = detector.detect_from_image(image_path)
+        # Utiliser un seuil de 0.7 pour éliminer les faux positifs
+        # Si aucune détection, le modèle n'est probablement pas adapté aux panneaux français
+        result = detector.detect_from_image(image_path, confidence_threshold=0.7)
         
         # Sauvegarder le résultat
         output_path = project_root / "detection_result.jpg"

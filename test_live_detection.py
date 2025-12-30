@@ -71,10 +71,13 @@ def main():
         
         print("\n" + "="*60)
         print("DÉTECTION EN COURS...")
-        print("Appuyez sur 'q' pour quitter")
+        print("="*60)
+        print("📹 Fenêtre de la caméra va s'ouvrir")
+        print("⌨️  Appuyez sur 'q' pour quitter")
+        print("💡 Astuce: Montrez un panneau de signalisation à la caméra")
         print("="*60)
         
-        # Lancer la détection
+        # Lancer la détection avec le nouveau seuil de confiance
         detector.run_detection(camera_index)
         
     except KeyboardInterrupt:

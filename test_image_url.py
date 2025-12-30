@@ -85,9 +85,10 @@ def main():
         detector = RealTimeDetector(model_path, class_names)
         print("✅ Détecteur chargé")
         
-        # Détecter
+        # Détecter avec seuil de confiance ajustable
         print(f"\nAnalyse de l'image...")
-        result = detector.detect_from_image(str(temp_path))
+        # Utiliser un seuil de 0.6 pour réduire les faux positifs
+        result = detector.detect_from_image(str(temp_path), confidence_threshold=0.6)
         
         # Sauvegarder le résultat
         output_path = project_root / "detection_result.jpg"

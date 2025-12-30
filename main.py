@@ -116,7 +116,7 @@ def run_detection(model_path: str, camera_index: int = 0):
         print(f"\nErreur: {e}")
 
 
-def test_image(model_path: str, image_source: str, output_path: str = None):
+def test_image(model_path: str, image_source: str, output_path: str = None, confidence: float = 0.7):
     """
     Teste la détection sur une image (fichier local ou URL)
     
@@ -124,6 +124,7 @@ def test_image(model_path: str, image_source: str, output_path: str = None):
         model_path: Chemin vers le modèle entraîné
         image_source: Chemin vers l'image ou URL
         output_path: Chemin pour sauvegarder le résultat (optionnel)
+        confidence: Seuil de confiance (défaut: 0.2, plus bas = plus de détections)
     """
     import urllib.request
     import cv2
@@ -157,7 +158,7 @@ def test_image(model_path: str, image_source: str, output_path: str = None):
                 return
         
         print(f"\nAnalyse de l'image: {image_path}")
-        result = detector.detect_from_image(image_path)
+        result = detector.detect_from_image(image_path, confidence_threshold=confidence)
         
         # Afficher le résultat
         print("✅ Détection terminée")
@@ -244,6 +245,13 @@ def main():
         help="Chemin pour sauvegarder le résultat (optionnel)"
     )
     
+    parser.add_argument(
+        "--confidence",
+        type=float,
+        default=0.7,
+        help="Seuil de confiance (0.0-1.0, défaut: 0.7, très strict pour éviter faux positifs)"
+    )
+    
     args = parser.parse_args()
     
     if args.mode == "train":
@@ -268,7 +276,7 @@ def main():
             print("Ou: python main.py test --image data/Test/00000.ppm")
             return
         
-        test_image(args.model_path, args.image, args.output)
+        test_image(args.model_path, args.image, args.output, args.confidence)
     
     elif args.mode == "download":
         download_gtsrb_dataset(args.data_path)
